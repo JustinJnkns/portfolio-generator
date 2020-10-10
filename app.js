@@ -1,12 +1,28 @@
-//initiats FS a module in node.JS
-const fs = require('fs');
-const generatePage = require('./src/page-template.js');
-//holds user command-line arguements
-const profileDataArgs = process.argv.slice(2)
-//variables for extracted args
-const [name, github] = profileDataArgs;
-  //arguement functions for writeFile are name of file being created,data that will write into file,callback function used for error handling 
-fs.writeFile('index.html',generatePage(name,github),err=> {
-  if (err) throw new Error(err)
-  console.log('Portfolio complete! check out index.html to see output')
-})
+const inquirer = require('inquirer')
+
+//   //initiats FS a module in node.JS
+// const fs = require('fs');
+// const generatePage = require('./src/page-template.js');
+
+// const pageHtml = generatePage(name,github)
+
+//   //arguement functions for writeFile are name of file being created,data that will write into file,callback function used for error handling 
+// fs.writeFile('index.html',pageHtml,err => {
+//   if (err) throw err
+//   console.log('Portfolio complete! check out index.html to see output')
+// })
+
+
+
+//mesage is question, Name is answer label 
+inquirer
+  .prompt([
+    {
+      type: 'input',
+      //Name: + user answer
+      name: 'Name',
+      //question
+      message: 'What is your name'
+    }
+  ])
+    .then(answers => console.log(answers))
