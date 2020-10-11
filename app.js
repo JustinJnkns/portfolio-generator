@@ -22,7 +22,15 @@ const promptProject = portfolioData => {
         return inquirer.prompt([{
                     type: 'input',
                     name: 'name',
-                    message: 'what is the name of your project'
+                    message: 'what is the name of your project(Required)',
+                    validate: nameInput => {
+                        if (nameInput) {
+                            return true
+                        } else {
+                            console.log('Please enter your name!')
+                            return false
+                        }
+                    }
                 },
                 {
                     type: 'input',
@@ -109,6 +117,24 @@ const promptUser = () => {
                 } else {
                     console.log('Please enter your Github name!')
                     return false
+                }
+            }
+        },
+        {
+            type: 'confirm',
+            name: 'confirmAbout',
+            message: 'would you like to enter some information about yourself for a "About" section?',
+            default: true
+        },
+        {
+            type: 'input',
+            name: 'about',
+            message: 'Provide some information about yourself:',
+            when: ({ confirmAbout }) => {
+                if (confirmAbout) {
+                    return true;
+                } else {
+                    return false;
                 }
             }
         },
